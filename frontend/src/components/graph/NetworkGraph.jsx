@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import useThemeRefresh, { readThemeColor } from "../../hooks/useThemeRefresh";
 
+const getNodeId = (node) => (typeof node === "object" ? node.id : node);
+
 const nodeColors = {
   Person: "entity-person",
   Case: "entity-case",
@@ -41,8 +43,8 @@ function NetworkGraph({
         linkColor={() => readThemeColor("text-muted")}
         linkWidth={(link) =>
           selectedNode &&
-          (link.source.id === selectedNode.id ||
-            link.target.id === selectedNode.id)
+          (getNodeId(link.source) === selectedNode.id ||
+            getNodeId(link.target) === selectedNode.id)
             ? 2
             : 1
         }
