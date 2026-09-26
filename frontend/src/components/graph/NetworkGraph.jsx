@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import useThemeRefresh, { readThemeColor } from "../../hooks/useThemeRefresh";
 
@@ -18,23 +17,9 @@ function NetworkGraph({
   graphRef,
 }) {
   useThemeRefresh();
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    if (containerRef.current && graphRef.current) {
-      const width = containerRef.current.clientWidth;
-      const height = containerRef.current.clientHeight;
-
-      graphRef.current.width(width);
-      graphRef.current.height(height);
-    }
-  }, [graphRef]);
 
   return (
-    <div
-      ref={containerRef}
-      className="h-full w-full overflow-hidden bg-[var(--color-background)]"
-    >
+    <div className="h-full w-full overflow-hidden bg-[var(--color-background)]">
       <ForceGraph2D
         ref={graphRef}
         graphData={data}
